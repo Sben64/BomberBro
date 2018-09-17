@@ -54,6 +54,7 @@ namespace BomberBros
                     GetKeys();
                     break;
                 case GameState.inGame:
+                    //Faire une classe InGame avec une méthode Update();
                     break;
                 default:
                     break;
@@ -62,6 +63,7 @@ namespace BomberBros
 
         public void LoadContent(ContentManager content)
         {
+            //Faire une classe InGame avec une méthode LoadContent();
             sf = content.Load<SpriteFont>("fontName");
             foreach (var tex in mainGUI)
             {
@@ -97,6 +99,7 @@ namespace BomberBros
                     spriteBatch.DrawString(sf, myName, new Vector2(10, 10), Color.Black);
                     break;
                 case GameState.inGame:
+                    //Faire une classe InGame avec une méthode Draw();
                     break;
                 default:
                     break;
