@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ClientTCP.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GUIMainMenu.cs" />
     <Compile Include="GUITexture.cs" />
