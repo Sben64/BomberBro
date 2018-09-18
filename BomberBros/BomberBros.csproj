@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Bombe.cs" />
     <Compile Include="ClientHandleData.cs" />
     <Compile Include="ClientTCP.cs" />
     <Compile Include="Game1.cs" />

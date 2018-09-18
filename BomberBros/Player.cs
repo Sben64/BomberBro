@@ -11,51 +11,45 @@ namespace BomberBros
         #region Player Attribut
         //Variables Player
         Texture2D _texturePlayer;
-        Vector2 _positionPlayers;
+        public Vector2 _positionPlayers;
         public double _poid;
         public bool _jump;
         //Variables Bombe
-        Texture2D _bombe;
-        Vector2 _positionBombe;
-        bool _posed;
-
+        Bombe bombe;
+        public bool poser_bombe = false;
 
         #endregion
 
         #region Method Class
         public Player()
         {
-            _posed = false;
             _jump = false;
         }
 
         public void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
             Move(graphics);
-            if (_posed)
-            {
-                _posed = false;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && poser_bombe == false)
             {
                 PoserBombe();
             }
+            //if(bombe != null)
+            //    bombe.Update(gameTime, graphics, _positionPlayers);
+            //poser_bombe = false;
+
+            //If timer  > 3 sec
+            // bombe.isalive = false;
         }
 
-        public void LoadContent(ContentManager content, Vector2 newPositionPlayer, string playerName, string bombeName)
+        public void LoadContent(ContentManager content, Vector2 newPositionPlayer, string playerName)
         {
             _texturePlayer = content.Load<Texture2D>(playerName);
             _positionPlayers = newPositionPlayer;
-            _bombe = content.Load<Texture2D>(bombeName);
         }
 
         public void Draw(SpriteBatch sprite)
         {
             sprite.Draw(_texturePlayer, _positionPlayers, Color.White);
-            if (_posed)
-            {
-                sprite.Draw(_bombe, _positionBombe, Color.White);
-            }
         }
 
         public void Move(GraphicsDeviceManager graphics)
@@ -89,13 +83,10 @@ namespace BomberBros
 
         public void PoserBombe()
         {
-            if (!_posed)
-            {
-                _positionBombe = new Vector2(
-                    (_positionPlayers.X + (_texturePlayer.Width / 2)) - _bombe.Width / 2,
-                    _positionPlayers.Y);
-                _posed = true;
-            }
+            bombe = new Bombe();
+
+            //bombe._positionBombe = new Vector2((_positionPlayers.X + (_texturePlayer.Width / 2)) /*- bombe._textureBombe.Width / 2*/, _positionPlayers.Y);
+            poser_bombe = true;
         }
         #endregion
 
