@@ -5,7 +5,13 @@ VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BomberBros", "BomberBros\BomberBros.csproj", "{E186BB76-54C6-46AF-99B7-4B4ABDB62F66}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Bindings", "Bindings\Bindings.shproj", "{30482CE8-C090-47DB-8C00-4A13FD214B27}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Bindings\Bindings.projitems*{30482ce8-c090-47db-8c00-4a13fd214b27}*SharedItemsImports = 13
+		Bindings\Bindings.projitems*{e186bb76-54c6-46af-99b7-4b4abdb62f66}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86

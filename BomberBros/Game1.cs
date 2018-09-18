@@ -12,12 +12,16 @@ namespace BomberBros
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        ClientTCP ctcp;
+        ClientHandleData chd;
+
         GUIMainMenu _guiManager = new GUIMainMenu();
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            
         }
 
         /// <summary>
@@ -29,6 +33,10 @@ namespace BomberBros
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            ctcp = new ClientTCP();
+            chd = new ClientHandleData();
+            chd.InitializeMessages();
+            ctcp.ConnectToServer();
             base.Initialize();
             this.IsMouseVisible = true;
         }
@@ -42,6 +50,7 @@ namespace BomberBros
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             _guiManager.LoadContent(Content);
+            ctcp.SendLogin();
             // TODO: use this.Content to load your game content here
         }
 
@@ -66,7 +75,7 @@ namespace BomberBros
 
 
             _guiManager.Update();
-
+            
 
             base.Update(gameTime);
         }
