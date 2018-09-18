@@ -1,75 +1,103 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace BomberBros
 {
-
-
-    public class Player
+    class Player
     {
-        Texture2D texture;
 
-        Vector2 position;
-        Vector2 velocity;
+        #region Player Attribut
+        //Variables Player
+        Texture2D _texturePlayer;
+        Vector2 _positionPlayers;
+        public double _poid;
+        public bool _jump;
+        //Variables Bombe
+        Texture2D _bombe;
+        Vector2 _positionBombe;
+        bool _posed;
 
 
+        #endregion
 
-        bool jump;
-
-        public Player(Texture2D newTexture, Vector2 newPosition)
+        #region Method Class
+        public Player()
         {
-            texture = newTexture;
-            position = newPosition;
-            jump = true;
+            _posed = false;
+            _jump = false;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
-            position += velocity;
+            Move(graphics);
+            if (_posed)
+            {
+                _posed = false;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                PoserBombe();
+            }
+        }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                position.X += 6f;
-                if (position.X > 480)
-                {
-                    position.X = 0;
-                }
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                position.X -= 6f;
-                if (position.X < 0)
-                {
-                    position.X = 480;
-                }
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) && jump == false)
-            {
-                position.Y -= 12f;
-                velocity.Y = -6f;
-                jump = true;
-            }
-            if (jump == true)
-            {
-                float i = 1;
-                velocity.Y += 0.15f * i;
-            }
-            if (position.Y + texture.Height >= 640 - texture.Height)
-            { jump = false; }
-            if (jump == false)
-            { velocity.Y = 0f; }
+        public void LoadContent(ContentManager content, Vector2 newPositionPlayer, string playerName, string bombeName)
+        {
+            _texturePlayer = content.Load<Texture2D>(playerName);
+            _positionPlayers = newPositionPlayer;
+            _bombe = content.Load<Texture2D>(bombeName);
         }
 
         public void Draw(SpriteBatch sprite)
         {
-            sprite.Draw(texture, position, Color.White);
+            sprite.Draw(_texturePlayer, _positionPlayers, Color.White);
+            if (_posed)
+            {
+                sprite.Draw(_bombe, _positionBombe, Color.White);
+            }
         }
+
+        public void Move(GraphicsDeviceManager graphics)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) && _jump == false)
+            {
+                _jump = true;
+                _positionPlayers.Y -= 6f;
+                if (_positionPlayers.Y < 0)
+                    _positionPlayers.Y = graphics.PreferredBackBufferHeight;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                _positionPlayers.Y += 6f;
+                if (_positionPlayers.Y > graphics.PreferredBackBufferHeight)
+                    _positionPlayers.Y = 0;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                _positionPlayers.X -= 6f;
+                if (_positionPlayers.X < 0)
+                    _positionPlayers.X = graphics.PreferredBackBufferWidth;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                _positionPlayers.X += 6f;
+                if (_positionPlayers.X > graphics.PreferredBackBufferWidth)
+                    _positionPlayers.X = 0;
+            }
+        }
+
+        public void PoserBombe()
+        {
+            if (!_posed)
+            {
+                _positionBombe = new Vector2(
+                    (_positionPlayers.X + (_texturePlayer.Width / 2)) - _bombe.Width / 2,
+                    _positionPlayers.Y);
+                _posed = true;
+            }
+        }
+        #endregion
+
     }
 }
