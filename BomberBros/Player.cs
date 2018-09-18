@@ -42,11 +42,11 @@ namespace BomberBros
             }
         }
 
-        public void LoadContent(ContentManager content, Vector2 newPositionPlayer, string playerName, string bombeName)
+        public void LoadContent(ContentManager content, Vector2 newPositionPlayer, string assetName, string bombAssetName)
         {
-            _texturePlayer = content.Load<Texture2D>(playerName);
+            _texturePlayer = content.Load<Texture2D>(assetName);
             _positionPlayers = newPositionPlayer;
-            _bombe = content.Load<Texture2D>(bombeName);
+            _bombe = content.Load<Texture2D>(bombAssetName);
         }
 
         public void Draw(SpriteBatch sprite)

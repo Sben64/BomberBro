@@ -77,7 +77,7 @@ namespace BomberBros
                 Exit();
 
 
-            _guiManager.Update();
+            _guiManager.Update(gameTime, graphics);
             
 
             base.Update(gameTime);

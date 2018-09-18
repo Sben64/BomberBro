@@ -78,7 +78,8 @@ namespace BomberBros
 
             //Handle Network Packets
             chd.HandleNetworkMessages(myBytes);
-            myStream.BeginRead(asyncBuff, 0, 8912, OnReceive, null);
+
+            myStream.BeginRead(asyncBuff, 0, 4096, OnReceive, null);
         }
 
         public  void SendData(byte[] data)

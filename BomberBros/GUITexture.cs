@@ -15,7 +15,7 @@ namespace BomberBros
         Texture2D guiTex;
         Vector2 _position;
         Rectangle rectangle;
-
+       
         string _assetName;
 
         public string AssetName { get => _assetName; set => _assetName = value; }
