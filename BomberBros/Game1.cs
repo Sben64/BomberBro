@@ -50,7 +50,10 @@ namespace BomberBros
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             _guiManager.LoadContent(Content);
-            ctcp.SendLogin();
+            if(ctcp.PlayerSocket.Connected == true)
+            {
+                ctcp.SendLogin();
+            }
             // TODO: use this.Content to load your game content here
         }
 
@@ -74,7 +77,7 @@ namespace BomberBros
                 Exit();
 
 
-            _guiManager.Update();
+            _guiManager.Update(gameTime, graphics);
             
 
             base.Update(gameTime);

@@ -130,10 +130,9 @@ namespace Bindings
             }
         }
 
-        public string GetString(bool peek = true)
+        public string GetString(int length, bool peek = true)
         {
-            int length = GetInteger(true);
-
+            
             if (buffUpdate)
             {
                 readBUff = buff.ToArray();

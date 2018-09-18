@@ -14,7 +14,7 @@ namespace BomberBros
     {
         List<GUITexture> mainGUI = new List<GUITexture>();
         List<GUITexture> createUsernameGUI = new List<GUITexture>();
-
+        Player joueur;
         enum GameState { mainMenu, enterNameMenun, inGame }
         GameState gameState;
 
@@ -29,14 +29,14 @@ namespace BomberBros
             mainGUI.Add(new GUITexture("Heptagon"));
             mainGUI.Add(new GUITexture("PlayButton"));
             mainGUI.Add(new GUITexture("Button2"));
-
+            joueur = new Player();
 
             createUsernameGUI.Add(new GUITexture("Button2"));
             createUsernameGUI.Add(new GUITexture("textbox"));
 
         }
 
-        public void Update()
+        public void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
             switch (gameState)
             {
@@ -55,6 +55,7 @@ namespace BomberBros
                     break;
                 case GameState.inGame:
                     //Faire une classe InGame avec une méthode Update();
+                    joueur.Update(gameTime, graphics);
                     break;
                 default:
                     break;
@@ -64,6 +65,7 @@ namespace BomberBros
         public void LoadContent(ContentManager content)
         {
             //Faire une classe InGame avec une méthode LoadContent();
+            joueur.LoadContent(content, new Vector2(100, 100), "Mario", "bombe2");
             sf = content.Load<SpriteFont>("fontName");
             foreach (var tex in mainGUI)
             {
@@ -100,6 +102,7 @@ namespace BomberBros
                     break;
                 case GameState.inGame:
                     //Faire une classe InGame avec une méthode Draw();
+                    joueur.Draw(spriteBatch);
                     break;
                 default:
                     break;

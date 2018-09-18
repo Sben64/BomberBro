@@ -72,12 +72,14 @@ namespace BomberBros
             if (byteAmt == 0)
             {
                 //DestroyUranus
+                PlayerSocket.Close();
                 return;
             }
 
             //Handle Network Packets
             chd.HandleNetworkMessages(myBytes);
-            myStream.BeginRead(asyncBuff, 0, 8912, OnReceive, null);
+
+            myStream.BeginRead(asyncBuff, 0, 4096, OnReceive, null);
         }
 
         public  void SendData(byte[] data)
@@ -91,8 +93,8 @@ namespace BomberBros
         public void SendLogin()
         {
             PacketBuffer _buffer = new PacketBuffer();
-            _buffer.AddInteger((int)ClientPackets.CLogin);
-            _buffer.AddString("Nahil");
+            _buffer.AddInteger((int)ClientPackets.CSendMessages);
+            _buffer.AddString("Nahilblblbl");
             _buffer.AddString("231456");
             
             SendData(_buffer.ToArray());
