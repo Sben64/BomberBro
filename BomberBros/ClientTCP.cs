@@ -72,6 +72,7 @@ namespace BomberBros
             if (byteAmt == 0)
             {
                 //DestroyUranus
+                PlayerSocket.Close();
                 return;
             }
 
@@ -91,8 +92,8 @@ namespace BomberBros
         public void SendLogin()
         {
             PacketBuffer _buffer = new PacketBuffer();
-            _buffer.AddInteger((int)ClientPackets.CLogin);
-            _buffer.AddString("Nahil");
+            _buffer.AddInteger((int)ClientPackets.CSendMessages);
+            _buffer.AddString("Nahilblblbl");
             _buffer.AddString("231456");
             
             SendData(_buffer.ToArray());

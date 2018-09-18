@@ -62,9 +62,13 @@ namespace BomberBros
                 velocity.Y += 0.15f * i;
             }
             if (position.Y + texture.Height >= 640 - texture.Height)
-            { jump = false; }
+            {
+                jump = false;
+            }
             if (jump == false)
-            { velocity.Y = 0f; }
+            {
+                velocity.Y = 0f;
+            }
         }
 
         public void Draw(SpriteBatch sprite)

@@ -16,6 +16,7 @@ namespace BomberBros
         public void InitializeMessages()
         {
             packets = new Dictionary<int, Packet_>();
+            packets.Add((int)ServerPackets.SReceiveMessage, HandleMessages);
         }
 
         public void HandleNetworkMessages(byte[] data)
@@ -32,6 +33,17 @@ namespace BomberBros
             {
                 packet.Invoke(data);
             }
-        } 
+        }
+        
+        void HandleMessages(byte[] data)
+        {
+            int longueur;
+            PacketBuffer _buffer = new PacketBuffer();
+            _buffer.AddBytes(data);
+            longueur = _buffer.GetInteger();
+            longueur = BitConverter.GetBytes(longueur).Length;
+            string login = _buffer.GetString(data.Length - longueur);
+            Console.WriteLine("2nd Option : " + login);
+        }
     }
 }
